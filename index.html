@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Podologia Studio — Learning Page</title>
+  <meta name="description" content="Learning Page do projeto Podologia Studio: prévia de site para podólogas com laboratório de paletas de cores. Conteúdo demonstrativo.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#5e7d68">
+
+  <!-- Fontes externas (opcionais). Sem internet, o site usa as fontes de sistema definidas em css/tokens.css -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/lab.css">
+
+  <!-- Configuração e motor de cores carregam primeiro para aplicar a paleta salva antes da página aparecer -->
+  <script src="js/config.js"></script>
+  <script src="js/palettes.js"></script>
+  <script src="js/color-utils.js"></script>
+  <script src="js/theme-engine.js"></script>
+  <script>PS.theme.init();</script>
+</head>
+<body>
+
+  <!-- =====================================================================
+       SPRITE DE ÍCONES (traço fino, discretos, herdam a cor do texto)
+       ===================================================================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-foot" viewBox="0 0 24 24"><path d="M8.6 9.2c3.3-1 7.3-.2 8.2 2.6.8 2.4-1 4.3-1.8 6.6-.7 2-1.6 3.6-4.2 3.6-3 0-4.6-2.6-4.4-5.8.2-3.3-.9-6.1 2.2-7z"/><circle cx="8.4" cy="5.3" r="1.5"/><circle cx="11.6" cy="4.3" r="1.2"/><circle cx="14.3" cy="4.7" r="1"/><circle cx="16.4" cy="6" r=".9"/><circle cx="17.9" cy="7.9" r=".8"/></symbol>
+    <symbol id="i-nail" viewBox="0 0 24 24"><path d="M7 21v-10a5 5 0 0 1 10 0v10"/><path d="M9.5 11.2a2.5 2.5 0 0 1 5 0V14h-5z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M4 8.5c2.7-2 5.3 2 8 0s5.3 2 8 0"/><path d="M4 13c2.7-2 5.3 2 8 0s5.3 2 8 0"/><path d="M4 17.5c2.7-2 5.3 2 8 0s5.3 2 8 0"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 11 10 6 19.5 5 19.5 14 14.5 19 6 19z"/><path d="M5 19l8.5-8.5"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.8a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z"/><path d="M9.3 14.6a2.8 2.8 0 0 0 2.4 2.6"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.4A4.1 4.1 0 0 1 12 7.3a4.1 4.1 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.2c0 4.8-3.3 8.3-7 9.8-3.7-1.5-7-5-7-9.8V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.4-3.7 4.3-5.5 7.5-5.5s6.1 1.8 7.5 5.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M4 20.5l1.3-4.1A8.3 8.3 0 1 1 8.2 19.2z"/><path d="M9 8.6c-.4 3.5 2.9 6.8 6.4 6.4l.7-1.6-2-1-.9.9a4.3 4.3 0 0 1-2.5-2.5l.9-.9-1-2z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.6-.7 1.6-1.5 0-1.2-1-1.6-1-2.6 0-1 .8-1.6 1.9-1.6H17a4 4 0 0 0 4-4C21 6.8 17 3 12 3z"/><g fill="currentColor" stroke="none"><circle cx="7.4" cy="11.6" r="1.25"/><circle cx="9.6" cy="7.4" r="1.25"/><circle cx="14.4" cy="7.2" r="1.25"/></g></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h11"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M20.5 15.5l-4.5-4.5-8.5 8"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M4.5 4.5v4h4"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 4c.6 4.3 3.7 7.4 8 8-4.3.6-7.4 3.7-8 8-.6-4.3-3.7-7.4-8-8 4.3-.6 7.4-3.7 8-8z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- =====================================================================
+       BARRA DO ESTÚDIO (fora do site demonstrativo)
+       ===================================================================== -->
+  <div class="studio-bar" role="note">
+    <div class="studio-bar__inner">
+      <p class="studio-bar__title"><strong>Podologia Studio</strong> <span>Learning Page · v0.1</span></p>
+      <p class="studio-bar__note">Modelo demonstrativo — nome, profissional, depoimentos e contatos são fictícios.</p>
+      <button class="studio-bar__btn" type="button" data-lab-open aria-controls="lab">
+        <svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg>
+        <span class="studio-bar__btn-extra">Laboratório de cores</span><span class="studio-bar__btn-short">Cores</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       SITE DEMONSTRATIVO
+       ===================================================================== -->
+  <div class="site" id="site">
+
+    <header class="site-header" id="topo" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="#inicio" aria-label="Podologia Studio — início">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M20 4c7.7 0 14 6.3 14 14v18H6V18C6 10.3 12.3 4 20 4z"/><circle cx="20" cy="20" r="3.2"/></svg>
+          </span>
+          <span class="brand__text">
+            <span class="brand__name" data-brand-name>Podologia</span>
+            <span class="brand__sub">Studio</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" id="site-nav" aria-label="Navegação principal" data-nav>
+          <ul role="list" class="site-nav__list">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#duvidas">Dúvidas</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+          <a class="btn btn--primary btn--block site-nav__cta" href="#contato" data-whatsapp>
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Agendar pelo WhatsApp
+          </a>
+        </nav>
+
+        <div class="site-header__actions">
+          <a class="btn btn--primary btn--sm site-header__cta" href="#contato" data-whatsapp>
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+            Agendar
+          </a>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+            <span class="sr-only" data-menu-label>Abrir menu</span>
+            <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+            <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+
+      <!-- ===== HERO ===== -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <span class="eyebrow">Podologia clínica · São Paulo</span>
+            <h1 id="hero-title">Cuidar dos pés é cuidar de <em>cada passo.</em></h1>
+            <p class="hero__lead">
+              Atendimento podológico individualizado, em um ambiente tranquilo e higienizado.
+              Você entende o que seus pés precisam e sai com orientações claras para o dia a dia — sem pressa e sem complicação.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#contato" data-whatsapp>
+                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                Agendar pelo WhatsApp
+              </a>
+              <a class="btn btn--outline" href="#servicos">
+                Conhecer os serviços
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </a>
+            </div>
+            <ul class="hero__facts" role="list">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Hora marcada, sem espera</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Materiais esterilizados</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg>Foco em prevenção</li>
+            </ul>
+          </div>
+
+          <div class="hero__visual">
+            <span class="hero__shape" aria-hidden="true"></span>
+            <figure class="media media--arch hero__media" data-image="hero">
+              <img alt="" decoding="async" fetchpriority="high">
+              <div class="media__fallback" aria-hidden="true">
+                <svg class="icon"><use href="#i-foot"/></svg>
+                <span>Imagem ilustrativa</span>
+              </div>
+            </figure>
+            <div class="hero__card" aria-hidden="false">
+              <span class="hero__card-icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+              <div>
+                <p class="hero__card-title">Primeira consulta</p>
+                <p class="hero__card-text">Avaliação completa e um plano de cuidados feito para você.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SERVIÇOS ===== -->
+      <section class="section services" id="servicos" aria-labelledby="servicos-title">
+        <div class="container">
+          <div class="services__head">
+            <div class="section-head">
+              <span class="eyebrow">Serviços</span>
+              <h2 id="servicos-title">Cuidados para pés <em>saudáveis e confortáveis</em></h2>
+            </div>
+            <p class="services__intro">
+              Cada atendimento começa com uma conversa e uma avaliação. Assim, o cuidado é pensado para a sua rotina,
+              o seu calçado e a sua sensibilidade — nunca no automático.
+            </p>
+          </div>
+
+          <ul class="services__grid" role="list">
+            <li class="card card--interactive service">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-foot"/></svg></span>
+              <h3>Avaliação podológica</h3>
+              <p>Análise da pele, das unhas e da pisada para identificar o que merece atenção e definir os próximos cuidados.</p>
+              <a class="link-arrow" href="#contato" data-whatsapp data-service="Avaliação podológica">Agendar avaliação <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </li>
+            <li class="card card--interactive service">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-nail"/></svg></span>
+              <h3>Cuidados com as unhas</h3>
+              <p>Corte técnico, unhas encravadas e unhas espessas, com manejo cuidadoso e orientação para evitar novos incômodos.</p>
+              <a class="link-arrow" href="#contato" data-whatsapp data-service="Cuidados com as unhas">Agendar cuidado <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </li>
+            <li class="card card--interactive service">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>
+              <h3>Calos e calosidades</h3>
+              <p>Remoção cuidadosa de calos e áreas de pele endurecida, com dicas de calçado e hidratação para o dia a dia.</p>
+              <a class="link-arrow" href="#contato" data-whatsapp data-service="Calos e calosidades">Agendar cuidado <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </li>
+            <li class="card card--interactive service">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+              <h3>Orientação preventiva</h3>
+              <p>Como cortar as unhas, escolher meias e calçados e perceber sinais de alerta. Informação prática para levar para casa.</p>
+              <a class="link-arrow" href="#contato" data-whatsapp data-service="Orientação preventiva">Agendar orientação <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </li>
+            <li class="card card--interactive service">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
+              <h3>Pés sensíveis</h3>
+              <p>Atendimento atento para pessoas com diabetes, idosos e gestantes, sempre em complemento ao acompanhamento médico.</p>
+              <a class="link-arrow" href="#contato" data-whatsapp data-service="Atendimento para pés sensíveis">Agendar atendimento <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </li>
+            <li class="card card--interactive service">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-drop"/></svg></span>
+              <h3>Pele e hidratação</h3>
+              <p>Cuidados com ressecamento e rachaduras nos calcanhares, com indicação de rotina de hidratação adequada à sua pele.</p>
+              <a class="link-arrow" href="#contato" data-whatsapp data-service="Cuidados com pele e hidratação">Agendar cuidado <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== SOBRE ===== -->
+      <section class="section about" id="sobre" aria-labelledby="sobre-title">
+        <div class="container about__grid">
+          <div class="about__visual">
+            <figure class="media media--arch about__media" data-image="about">
+              <img alt="" loading="lazy" decoding="async">
+              <div class="media__fallback" aria-hidden="true">
+                <svg class="icon"><use href="#i-user"/></svg>
+                <span>Foto da profissional</span>
+              </div>
+            </figure>
+            <div class="about__stat">
+              <p class="about__stat-number">8<span>anos</span></p>
+              <p class="about__stat-label">de atuação em podologia <span class="about__stat-note">(dado fictício de demonstração)</span></p>
+            </div>
+          </div>
+
+          <div class="about__copy">
+            <span class="eyebrow">Sobre a profissional</span>
+            <h2 id="sobre-title">Dra. Marina Oliveira</h2>
+            <p class="about__role">Podologia clínica e cuidados preventivos com os pés</p>
+            <p>
+              Marina acredita que um bom atendimento começa pela escuta. Antes de qualquer procedimento, ela quer saber da sua rotina,
+              dos seus calçados e do que tem incomodado. É assim que o cuidado deixa de ser genérico e passa a fazer sentido para você.
+            </p>
+            <p>
+              No consultório, cada etapa é explicada com calma: o que está sendo feito, por que e como você pode manter os pés bem cuidados em casa.
+            </p>
+
+            <blockquote class="about__quote">
+              <p>“Quero que cada pessoa saia daqui entendendo melhor os próprios pés — e com mais tranquilidade para caminhar.”</p>
+            </blockquote>
+
+            <ul class="checklist" role="list">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Atendimento individual, com tempo para conversar</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Explicações simples, sem termos difíceis</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Orientações por escrito para o cuidado em casa</li>
+            </ul>
+
+            <p class="demo-note">Perfil fictício criado para esta demonstração. Em um site real, formação, registros profissionais e fotos devem ser informados pela própria profissional.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== DIFERENCIAIS ===== -->
+      <section class="section values" id="diferenciais" aria-labelledby="diferenciais-title">
+        <div class="container values__grid">
+          <div class="values__intro">
+            <span class="eyebrow eyebrow--on-deep">Diferenciais</span>
+            <h2 id="diferenciais-title">Um cuidado que começa <em>antes do procedimento</em></h2>
+            <p>Detalhes que tornam a experiência mais segura, confortável e transparente do primeiro contato ao pós-atendimento.</p>
+            <figure class="media values__media" data-image="care">
+              <img alt="" loading="lazy" decoding="async">
+              <div class="media__fallback" aria-hidden="true">
+                <svg class="icon"><use href="#i-sparkle"/></svg>
+                <span>Ambiente do consultório</span>
+              </div>
+            </figure>
+          </div>
+
+          <ol class="values__list" role="list">
+            <li class="value">
+              <span class="value__num">01</span>
+              <div>
+                <h3>Acolhimento</h3>
+                <p>Ambiente calmo, horário reservado só para você e espaço para tirar todas as dúvidas, sem julgamentos.</p>
+              </div>
+            </li>
+            <li class="value">
+              <span class="value__num">02</span>
+              <div>
+                <h3>Higiene e biossegurança</h3>
+                <p>Instrumentais esterilizados, materiais descartáveis quando indicado e superfícies higienizadas entre os atendimentos.</p>
+              </div>
+            </li>
+            <li class="value">
+              <span class="value__num">03</span>
+              <div>
+                <h3>Atendimento individualizado</h3>
+                <p>Cada plano de cuidados considera sua rotina, sua sensibilidade e o que você espera do atendimento.</p>
+              </div>
+            </li>
+            <li class="value">
+              <span class="value__num">04</span>
+              <div>
+                <h3>Orientação preventiva</h3>
+                <p>Você sai sabendo como cuidar dos pés em casa e quais sinais merecem atenção, para prevenir novos incômodos.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ===== DEPOIMENTOS ===== -->
+      <section class="section testimonials" id="depoimentos" aria-labelledby="depoimentos-title">
+        <div class="container">
+          <div class="section-head section-head--center">
+            <span class="eyebrow">Depoimentos</span>
+            <h2 id="depoimentos-title">Como pode soar a <em>experiência</em> de quem é atendido</h2>
+            <span class="tag tag--demo">Exemplos fictícios para demonstração de layout</span>
+          </div>
+
+          <ul class="testimonials__grid" role="list">
+            <li class="card testimonial">
+              <svg class="testimonial__mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M0 32V19C0 8.5 6 2 16 0l2 4.5C12 6.4 9 10.6 9 16h8v16zm22 0V19C22 8.5 28 2 38 0l2 4.5C34 6.4 31 10.6 31 16h8v16z"/></svg>
+              <p class="testimonial__text">Eu adiava a consulta por vergonha. Fui recebida com muita calma, entendi o que estava acontecendo e saí com um passo a passo para cuidar em casa.</p>
+              <div class="testimonial__author">
+                <span class="avatar" aria-hidden="true">A</span>
+                <div>
+                  <p class="testimonial__name">Ana, 34 anos</p>
+                  <p class="testimonial__meta">Depoimento ilustrativo</p>
+                </div>
+              </div>
+            </li>
+            <li class="card testimonial">
+              <svg class="testimonial__mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M0 32V19C0 8.5 6 2 16 0l2 4.5C12 6.4 9 10.6 9 16h8v16zm22 0V19C22 8.5 28 2 38 0l2 4.5C34 6.4 31 10.6 31 16h8v16z"/></svg>
+              <p class="testimonial__text">Levei minha mãe, que tem os pés bem sensíveis. Gostei da paciência e de como cada etapa foi explicada antes de começar.</p>
+              <div class="testimonial__author">
+                <span class="avatar" aria-hidden="true">R</span>
+                <div>
+                  <p class="testimonial__name">Ricardo, 41 anos</p>
+                  <p class="testimonial__meta">Depoimento ilustrativo</p>
+                </div>
+              </div>
+            </li>
+            <li class="card testimonial">
+              <svg class="testimonial__mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M0 32V19C0 8.5 6 2 16 0l2 4.5C12 6.4 9 10.6 9 16h8v16zm22 0V19C22 8.5 28 2 38 0l2 4.5C34 6.4 31 10.6 31 16h8v16z"/></svg>
+              <p class="testimonial__text">Ambiente limpo, pontualidade e muita atenção. As dicas sobre calçado e hidratação já mudaram minha rotina.</p>
+              <div class="testimonial__author">
+                <span class="avatar" aria-hidden="true">C</span>
+                <div>
+                  <p class="testimonial__name">Carla, 52 anos</p>
+                  <p class="testimonial__meta">Depoimento ilustrativo</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <p class="demo-note testimonials__note">Os textos acima não são avaliações reais de pacientes. Em um site publicado, utilize apenas relatos verdadeiros e autorizados.</p>
+        </div>
+      </section>
+
+      <!-- ===== PERGUNTAS FREQUENTES ===== -->
+      <section class="section faq" id="duvidas" aria-labelledby="duvidas-title">
+        <div class="container faq__grid">
+          <div class="faq__intro">
+            <span class="eyebrow">Perguntas frequentes</span>
+            <h2 id="duvidas-title">Dúvidas <em>comuns</em> antes da primeira consulta</h2>
+            <p>Não encontrou o que procurava? Envie sua pergunta pelo WhatsApp — a resposta vem de quem vai atender você.</p>
+            <a class="link-arrow" href="#contato" data-whatsapp data-service="Dúvida sobre o atendimento">
+              Enviar uma dúvida <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+
+          <div class="accordion" data-accordion>
+            <div class="accordion__item">
+              <h3>
+                <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-1-btn">
+                  Qual é a diferença entre podologia e pedicure?
+                  <span class="accordion__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="accordion__panel" id="faq-1" role="region" aria-labelledby="faq-1-btn" hidden>
+                <div><p>A pedicure tem foco estético. A podologia cuida da saúde dos pés: avalia pele e unhas, trata alterações como calos e unhas encravadas e orienta a prevenção. Os dois atendimentos podem se complementar.</p></div>
+              </div>
+            </div>
+            <div class="accordion__item">
+              <h3>
+                <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-2-btn">
+                  O atendimento dói?
+                  <span class="accordion__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="accordion__panel" id="faq-2" role="region" aria-labelledby="faq-2-btn" hidden>
+                <div><p>A maioria dos cuidados é tranquila. A sensibilidade varia de pessoa para pessoa, por isso cada etapa é explicada antes e você pode pedir uma pausa a qualquer momento.</p></div>
+              </div>
+            </div>
+            <div class="accordion__item">
+              <h3>
+                <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-3-btn">
+                  Com que frequência devo ir à podóloga?
+                  <span class="accordion__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="accordion__panel" id="faq-3" role="region" aria-labelledby="faq-3-btn" hidden>
+                <div><p>Depende das necessidades de cada pessoa. Na primeira consulta, a avaliação ajuda a definir um intervalo adequado para o seu caso.</p></div>
+              </div>
+            </div>
+            <div class="accordion__item">
+              <h3>
+                <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-4-btn">
+                  Pessoas com diabetes podem ser atendidas?
+                  <span class="accordion__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="accordion__panel" id="faq-4" role="region" aria-labelledby="faq-4-btn" hidden>
+                <div><p>Sim. O atendimento é feito com cuidado redobrado e não substitui o acompanhamento médico. Se possível, traga informações sobre o seu tratamento atual.</p></div>
+              </div>
+            </div>
+            <div class="accordion__item">
+              <h3>
+                <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-5-btn">
+                  Como os materiais são higienizados?
+                  <span class="accordion__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="accordion__panel" id="faq-5" role="region" aria-labelledby="faq-5-btn" hidden>
+                <div><p>Os instrumentais passam por limpeza e esterilização, e materiais descartáveis são usados quando indicado. Você pode perguntar sobre o processo sempre que quiser.</p></div>
+              </div>
+            </div>
+            <div class="accordion__item">
+              <h3>
+                <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-6-btn">
+                  Como faço para agendar?
+                  <span class="accordion__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="accordion__panel" id="faq-6" role="region" aria-labelledby="faq-6-btn" hidden>
+                <div><p>Pelo WhatsApp. Conte brevemente o que está sentindo e escolha o melhor horário entre as opções disponíveis.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== AGENDAMENTO E CONTATO ===== -->
+      <section class="section contact" id="contato" aria-labelledby="contato-title">
+        <div class="container contact__grid">
+          <div class="contact__cta">
+            <span class="eyebrow eyebrow--on-primary">Agendamento</span>
+            <h2 id="contato-title">Agende sua avaliação em poucos minutos</h2>
+            <ol class="steps" role="list">
+              <li><span>1</span>Envie uma mensagem contando o que sente</li>
+              <li><span>2</span>Escolha o dia e o horário disponíveis</li>
+              <li><span>3</span>Receba a confirmação e as orientações</li>
+            </ol>
+            <a class="btn btn--on-primary" href="#contato" data-whatsapp>
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Conversar pelo WhatsApp
+            </a>
+            <p class="contact__cta-note">Contato ilustrativo: nesta demonstração o botão não abre uma conversa real.</p>
+          </div>
+
+          <div class="contact__info card">
+            <ul class="info-list" role="list">
+              <li>
+                <span class="info-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+                <div>
+                  <p class="info-list__label">Endereço</p>
+                  <p data-contact="address">Rua das Acácias, 120 — sala 4<br>Vila Mariana, São Paulo – SP</p>
+                </div>
+              </li>
+              <li>
+                <span class="info-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+                <div>
+                  <p class="info-list__label">Horários</p>
+                  <p data-contact="hours">Segunda a sexta, 9h às 19h<br>Sábados, 9h às 13h</p>
+                </div>
+              </li>
+              <li>
+                <span class="info-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg></span>
+                <div>
+                  <p class="info-list__label">WhatsApp</p>
+                  <p data-contact="phone">(11) 90000-0000</p>
+                </div>
+              </li>
+              <li>
+                <span class="info-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+                <div>
+                  <p class="info-list__label">E-mail</p>
+                  <p data-contact="email">contato@podologiastudio.exemplo</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="map" role="img" aria-label="Mapa ilustrativo da localização">
+              <svg class="map__streets" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <path d="M-10 120 C80 100 140 140 220 110 S340 60 420 80" />
+                <path d="M60 -10 L110 200" />
+                <path d="M250 -10 C240 60 270 120 260 200" />
+                <path d="M-10 40 L420 30" class="thin" />
+                <path d="M-10 160 L420 150" class="thin" />
+                <path d="M170 -10 L190 200" class="thin" />
+                <path d="M340 -10 L320 200" class="thin" />
+              </svg>
+              <span class="map__park" aria-hidden="true"></span>
+              <span class="map__pin" aria-hidden="true"><svg class="icon"><use href="#i-pin"/></svg></span>
+              <span class="map__label">Mapa ilustrativo</span>
+            </div>
+            <p class="demo-note">Endereço, telefone e e-mail fictícios, apenas para demonstração.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer class="site-footer">
+      <div class="container site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="brand brand--footer" href="#inicio" aria-label="Podologia Studio — voltar ao início">
+            <span class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 40 40"><path d="M20 4c7.7 0 14 6.3 14 14v18H6V18C6 10.3 12.3 4 20 4z"/><circle cx="20" cy="20" r="3.2"/></svg>
+            </span>
+            <span class="brand__text">
+              <span class="brand__name">Podologia</span>
+              <span class="brand__sub">Studio</span>
+            </span>
+          </a>
+          <p>Podologia clínica e cuidados preventivos com os pés, com atendimento individual em São Paulo.</p>
+        </div>
+
+        <nav class="site-footer__col" aria-label="Navegação do rodapé">
+          <p class="site-footer__title">Navegação</p>
+          <ul role="list">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#duvidas">Dúvidas</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__col">
+          <p class="site-footer__title">Contato</p>
+          <ul role="list">
+            <li>(11) 90000-0000</li>
+            <li>contato@podologiastudio.exemplo</li>
+            <li>Vila Mariana, São Paulo – SP</li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <p class="site-footer__title">Agende</p>
+          <a class="btn btn--on-deep btn--sm" href="#contato" data-whatsapp>
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="container site-footer__bottom">
+        <p>© <span data-year>2026</span> Podologia Studio</p>
+        <p class="site-footer__demo">Modelo demonstrativo · profissional, depoimentos e contatos fictícios · não substitui orientação médica</p>
+      </div>
+    </footer>
+  </div><!-- /.site -->
+
+  <!-- =====================================================================
+       LABORATÓRIO DE CORES (ferramenta separada do site)
+       ===================================================================== -->
+  <button class="lab-fab" type="button" data-lab-open aria-controls="lab" aria-expanded="false">
+    <span class="lab-fab__swatches" data-fab-swatches aria-hidden="true"></span>
+    <span class="lab-fab__text">Cores</span>
+  </button>
+
+  <aside class="lab" id="lab" aria-labelledby="lab-title" data-lab hidden>
+    <div class="lab__head">
+      <div>
+        <p class="lab__kicker">Ferramenta de personalização</p>
+        <h2 class="lab__title" id="lab-title">Laboratório de cores</h2>
+      </div>
+      <button class="lab__close" type="button" data-lab-close aria-label="Fechar laboratório de cores">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+
+    <div class="lab__body">
+      <section class="lab__section" aria-labelledby="lab-palettes-title">
+        <div class="lab__section-head">
+          <h3 class="lab__label" id="lab-palettes-title">Paletas</h3>
+          <span class="lab__status" data-lab-status>Sálvia & Marfim</span>
+        </div>
+        <div class="palette-list" role="radiogroup" aria-labelledby="lab-palettes-title" data-palette-list></div>
+      </section>
+
+      <section class="lab__section" aria-labelledby="lab-custom-title">
+        <div class="lab__section-head">
+          <h3 class="lab__label" id="lab-custom-title">Ajuste fino</h3>
+          <span class="lab__badge" data-custom-badge hidden>Personalizada</span>
+        </div>
+        <div class="pickers">
+          <label class="picker">
+            <input type="color" data-picker="primary" value="#5e7d68">
+            <span class="picker__text"><span class="picker__name">Cor principal</span><span class="picker__hex" data-picker-hex="primary">#5E7D68</span></span>
+          </label>
+          <label class="picker">
+            <input type="color" data-picker="accent" value="#9db59a">
+            <span class="picker__text"><span class="picker__name">Cor de destaque</span><span class="picker__hex" data-picker-hex="accent">#9DB59A</span></span>
+          </label>
+          <label class="picker">
+            <input type="color" data-picker="secondary" value="#dfe7db">
+            <span class="picker__text"><span class="picker__name">Cor de apoio</span><span class="picker__hex" data-picker-hex="secondary">#DFE7DB</span></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="lab__section" aria-labelledby="lab-contrast-title">
+        <h3 class="lab__label" id="lab-contrast-title">Legibilidade</h3>
+        <ul class="contrast-list" role="list" data-contrast-list aria-live="polite"></ul>
+        <p class="lab__hint">Cores escolhidas manualmente são ajustadas automaticamente quando usadas em textos, para manter a leitura confortável.</p>
+      </section>
+
+      <div class="lab__actions">
+        <button class="lab-btn" type="button" data-action="restore">
+          <svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg>
+          Restaurar paleta
+        </button>
+        <button class="lab-btn" type="button" data-action="original">
+          <svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg>
+          Configuração original
+        </button>
+        <button class="lab-btn lab-btn--wide" type="button" data-action="copy">
+          <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+          Copiar variáveis CSS
+        </button>
+      </div>
+      <p class="lab__foot">Suas escolhas ficam salvas apenas neste navegador.</p>
+    </div>
+  </aside>
+
+  <button class="back-to-top" type="button" data-back-to-top aria-label="Voltar ao início da página">
+    <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+  </button>
+
+  <div class="toast" role="status" aria-live="polite" data-toast>
+    <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+    <span data-toast-text></span>
+  </div>
+
+  <!-- Scripts clássicos (funcionam abrindo o arquivo direto, sem servidor) -->
+  <script src="js/site.js"></script>
+  <script src="js/lab-panel.js"></script>
+</body>
+</html>
